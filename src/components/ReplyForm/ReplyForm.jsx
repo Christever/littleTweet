@@ -3,7 +3,7 @@ import { InputTextarea } from "primereact/inputtextarea";
 import { useState } from "react";
 import { useCreateReply } from "@/hooks/useCreateReply";
 
-export default function ReplyForm({ tweetId }) {
+export default function ReplyForm({ tweetId, onSuccess }) {
   const [content, setContent] = useState("");
 
   const { createReply, isLoading } = useCreateReply();
@@ -19,6 +19,7 @@ export default function ReplyForm({ tweetId }) {
 
     if (result.success) {
       setContent("");
+      onSuccess();
     }
   };
 

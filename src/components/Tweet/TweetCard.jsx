@@ -1,5 +1,6 @@
-
+import ReplyCard from "@/components/ReplyCard/ReplyCard";
 import ReplyForm from "@/components/ReplyForm/ReplyForm";
+import ReplyList from "@/components/ReplyList/ReplyList";
 import { formatRelativeDate } from "@/utils/date";
 
 import { Card } from "primereact/card";
@@ -27,19 +28,20 @@ export default function TweetCard({ tweet }) {
               ❤️ {tweet.likes}
             </button>
 
-            <button className="hover:text-teal-400 duration-200" onClick={()=>setShowReply(!showReply)}>
+            <button
+              className="hover:text-teal-400 duration-200"
+              onClick={() => setShowReply(!showReply)}
+            >
               💬 Répondre
             </button>
-
-            {showReply && (
-              <ReplyForm tweetId={tweet.id}/>
-            )}
-
-           
           </div>
 
           <span>{formatRelativeDate(tweet.createdAt)}</span>
         </div>
+        {showReply && (
+          <ReplyForm tweetId={tweet.id} onSuccess={() => setShowReply(false)} />
+        )}
+        <ReplyList tweetId={tweet.id} />
       </Card>
     </article>
   );

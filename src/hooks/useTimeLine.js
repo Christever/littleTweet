@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { listenTweets } from "@/services/tweetService";
-import { listenUsers } from "@/services/timeLineService";
+import { listenUsers } from "@/services/userService";
 
 export function useTimeline() {
     // States

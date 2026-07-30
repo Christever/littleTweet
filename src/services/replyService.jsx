@@ -1,5 +1,5 @@
 import { auth, database } from "@/firebase/firebase";
-import { onValue, ref, set } from "firebase/database";
+import { onValue, ref, set, push } from "firebase/database";
 
 export function listenReplies(callback, errorCallback) {
   const repliesRef = ref(database, "replies");
@@ -8,7 +8,7 @@ export function listenReplies(callback, errorCallback) {
   const unsubscribe = onValue(
     repliesRef,
     (snapshot) => {
-      if (!snapshot) {
+      if (!snapshot.exists()) {
         callback([]);
         return;
       }
@@ -21,8 +21,8 @@ export function listenReplies(callback, errorCallback) {
           id,
           ...reply,
         }))
-        .filter((reply) => reply.tweetId === tweetId)
-        .sort((a, b) => a.createdAt - b.createdAt);
+        .sort((a, b) => b.createdAt - a.createdAt);
+
       callback(replies);
     },
     (error) => {
@@ -35,11 +35,13 @@ export function listenReplies(callback, errorCallback) {
 
 export async function createReplyService(tweetId, content) {
   const user = auth.currentUser;
+
   if (!user) {
     throw new Error("Utilisateur non connecté");
   }
 
-  const replyRef = ref(database, "replies");
+  console.log("replyRef: ");
+  const replyRef = push(ref(database, "replies"));
   const reply = {
     tweetId,
     userId: user.uid,
