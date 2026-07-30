@@ -1,0 +1,7 @@
+Fond : bg-slate-950
+Colonnes : bg-slate-900
+Bordures : border-slate-800
+Boutons : bg-teal-600
+Liens : text-teal-400
+Notifications : bg-teal-500
+Icônes actives : text-teal-400

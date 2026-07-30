@@ -1,0 +1,16 @@
+
+
+body {
+  @apply bg-slate-950 text-white;
+}
+
+.h1 {
+  @apply text-3xl md:text-4xl;
+}
+
+.input {
+  @apply bg-slate-800 border-slate-700 text-slate-100 placeholder:text-slate-400
+}
+.p-password {
+    width: 100%;
+}

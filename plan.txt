@@ -1,0 +1,10 @@
+✅ Authentification
+✅ Structure en 3 colonnes
+✅ Publication d'un message
+✅ Affichage du fil d'actualité
+✅ Suppression/édition de ses propres messages
+✅ Profil utilisateur
+✅ Likes
+✅ Réponses
+✅ Suivi (followers/following)
+✅ Recherche
