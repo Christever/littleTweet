@@ -1,14 +1,21 @@
 import { registerUserService } from "@/services/authServices";
+import { resizeImage } from "@/services/imageService";
+import { upload } from "@/services/uploadService";
 import { useState } from "react";
 
 
 export function useRegister() {
     const [isLoading, setIsLoading] = useState(false)
 
-    const registerUser = async (data) => {
+    const registerUser = async (data, imageFile) => {
         try {
             setIsLoading(true);
-            const user = await registerUserService(data);
+            let imgUrl = "";
+            if (imageFile) {
+                const optimizeImage = await resizeImage(imageFile)
+                imgUrl = await upload(optimizeImage, "avatars")
+            }
+            const user = await registerUserService(data, imgUrl);
             return {
                 success: true,
                 data: user,

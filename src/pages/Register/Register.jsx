@@ -1,4 +1,5 @@
 import Footer from "@/components/common/Footer/Footer";
+import Loader from "@/components/common/Loader/Loader";
 import Title from "@/components/common/Title/Title";
 import { useRegister } from "@/hooks/useRegister";
 import ContainerLayout from "@/layouts/ContainerLayout";
@@ -7,6 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -14,8 +16,22 @@ import { toast } from "react-toastify";
 export default function Register() {
   const navigate = useNavigate();
 
+  // State
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   // Hook
-  const { isLoading, success, registerUser } = useRegister();
+  const { isLoading, registerUser } = useRegister();
+
+  // Cycle
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
+
   // Utilisatiion de Zod pour validation des inputs
   const {
     register,
@@ -33,7 +49,7 @@ export default function Register() {
   });
 
   const onSubmit = async (data) => {
-    const result = await registerUser(data);
+    const result = await registerUser(data, imageFile);
     if (result.success) {
       toast.success("Compte crée avec succès");
       navigate("/login");
@@ -41,6 +57,10 @@ export default function Register() {
     }
     toast.error(result.error);
   };
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <ContainerLayout>
@@ -137,6 +157,33 @@ export default function Register() {
               {errors.confirmPassword.message}
             </small>
           )}
+        </div>
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <label className="">Photo</label>
+            <input
+              placeholder="Photo"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setImageFile(file);
+                  setImagePreview(URL.createObjectURL(file));
+                }
+              }}
+            />
+
+            {imagePreview && (
+              <div className="mt-1">
+                <img
+                  src={imagePreview}
+                  alt="apercu"
+                  className=" object-cover rounded-lg shadow"
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         <Button

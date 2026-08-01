@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { ref, set, get } from "firebase/database";
 
-export async function registerUserService(data) {
+export async function registerUserService(data, avatarUrl) {
   // On récupère les données
   const { email, password, pseudo } = data;
 
@@ -33,11 +33,12 @@ export async function registerUserService(data) {
 
     //   On crée le profile dans Realtime Database
     //   (user par défaut)
-    // On n'enregistre pas l'amil, par mesure de sécurité. Firebase Auth le gère
+    // On n'enregistre pas l'email, par mesure de sécurité. Firebase Auth le gère
     await set(ref(database, `users/${user.uid}`), {
       pseudo,
       role: "user",
       createdAt: Date.now(),
+      avatarUrl: avatarUrl || null
     });
     // Reservation du pseudo
     await set(usernameRef, user.uid);
