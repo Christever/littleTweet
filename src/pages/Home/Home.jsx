@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
-import Title from "@/components/Title/Title";
+import Footer from "@/components/common/Footer/Footer";
+import Title from "@/components/common/Title/Title";
 import ContainerLayout from "@/layouts/ContainerLayout";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";

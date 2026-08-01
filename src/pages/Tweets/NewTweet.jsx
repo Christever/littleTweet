@@ -1,5 +1,5 @@
 import Loader from "@/components/common/Loader/Loader";
-import Title from "@/components/Title/Title";
+import Title from "@/components/common/Title/Title";
 import { useCreateTweet } from "@/hooks/useCreateTweet";
 import ContainerLayout from "@/layouts/ContainerLayout";
 import { tweetSchema } from "@/schemas/tweetSchema";

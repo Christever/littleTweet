@@ -1,5 +1,5 @@
-import Footer from "@/components/Footer/Footer";
-import Title from "@/components/Title/Title";
+import Footer from "@/components/common/Footer/Footer";
+import Title from "@/components/common/Title/Title";
 import { useRegister } from "@/hooks/useRegister";
 import ContainerLayout from "@/layouts/ContainerLayout";
 import { registerSchema } from "@/schemas/authSchema";

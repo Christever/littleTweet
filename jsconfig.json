@@ -6,5 +6,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src", "src/schemas/authSchema.js"]
+  "include": ["src", "src/schemas/authSchema.js", "src/components/Tweet"]
 }

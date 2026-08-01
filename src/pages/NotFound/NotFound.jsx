@@ -1,6 +1,6 @@
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
-import Title from "@/components/Title/Title";
+import Title from "@/components/common/Title/Title";
 
 export default function ErrorPage() {
 

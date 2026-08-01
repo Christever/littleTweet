@@ -1,5 +1,6 @@
+import Footer from "@/components/common/Footer/Footer";
 import Loader from "@/components/common/Loader/Loader";
-import Title from "@/components/Title/Title";
+import Title from "@/components/common/Title/Title";
 
 import TweetCard from "@/components/Tweet/TweetCard";
 import { useAuth } from "@/context/AuthContext";
@@ -40,7 +41,7 @@ export default function Tweets() {
   }
 
   return (
-    <div className="mt-4 max-w-3xl mx-auto">
+    <div className="mt-4 max-w-3xl mx-auto mb-4">
       <Title
         title={"Mon fil"}
         subTitle={`Quoi de neuf, ${profile?.pseudo} ?`}
@@ -57,6 +58,7 @@ export default function Tweets() {
           <TweetCard key={tweet.id} tweet={tweet} />
         ))}
       </section>
+   
     </div>
   );
 }

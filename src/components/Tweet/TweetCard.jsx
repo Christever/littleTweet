@@ -1,3 +1,4 @@
+
 import Loader from "@/components/common/Loader/Loader";
 import ReplyForm from "@/components/ReplyForm/ReplyForm";
 import ReplyList from "@/components/ReplyList/ReplyList";
@@ -8,6 +9,7 @@ import { formatRelativeDate } from "@/utils/date";
 
 import { Card } from "primereact/card";
 import { useState } from "react";
+import AvatarUser from './../common/Avatar/Avatar';
 
 export default function TweetCard({ tweet }) {
   // States
@@ -24,7 +26,8 @@ export default function TweetCard({ tweet }) {
   const hasLiked = !!tweet.likes?.[user.uid];
   const header = (
     <div className="flex items-center gap-2 p-2">
-      <i className="pi pi-user text-teal-400 text-lg" />
+      {/* <i className="pi pi-user text-teal-400 text-lg" /> */}
+      <AvatarUser pseudo={tweet.pseudo}/>
       <h2 className="text-teal-400 font-semibold">{tweet.pseudo}</h2>
     </div>
   );

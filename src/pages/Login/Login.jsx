@@ -1,5 +1,5 @@
 import Loader from "@/components/common/Loader/Loader";
-import Title from "@/components/Title/Title";
+import Title from "@/components/common/Title/Title";
 import { useLogin } from "@/hooks/useLogin";
 import ContainerLayout from "@/layouts/ContainerLayout";
 import { loginSchema } from "@/schemas/authSchema";
