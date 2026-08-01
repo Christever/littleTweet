@@ -60,6 +60,7 @@ export function useTimeline() {
     const timeline = tweets.map((tweet) => ({
         ...tweet,
         pseudo: users[tweet.userId]?.pseudo ?? "Utilisateur inconnu",
+        avatarUrl: users[tweet.userId]?.avatarUrl ?? null,
     }));
 
     return {

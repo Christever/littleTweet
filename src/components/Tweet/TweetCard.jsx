@@ -27,7 +27,7 @@ export default function TweetCard({ tweet }) {
   const header = (
     <div className="flex items-center gap-2 p-2">
       {/* <i className="pi pi-user text-teal-400 text-lg" /> */}
-      <AvatarUser pseudo={tweet.pseudo}/>
+      <AvatarUser pseudo={tweet.pseudo} avatarUrl={tweet.avatarUrl}/>
       <h2 className="text-teal-400 font-semibold">{tweet.pseudo}</h2>
     </div>
   );

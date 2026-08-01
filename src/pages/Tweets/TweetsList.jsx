@@ -1,4 +1,4 @@
-import Footer from "@/components/common/Footer/Footer";
+
 import Loader from "@/components/common/Loader/Loader";
 import Title from "@/components/common/Title/Title";
 
@@ -10,6 +10,7 @@ import { useTimeline } from "@/hooks/useTimeLine";
 
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
+
 export default function Tweets() {
   const navigate = useNavigate();
   const { profile, isLoading: isLoadingAuth } = useAuth();
