@@ -10,6 +10,7 @@ const Register = lazy(() => import("@/pages/Register/Register"));
 const Tweets = lazy(() => import("@/pages/Tweets/TweetsList"));
 const NewTweet = lazy(() => import("@/pages/Tweets/NewTweet"));
 const About = lazy(() => import("@/pages/About/About"));
+const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
 const Test = lazy(() => import("@/pages/Test"));
 
 import { createBrowserRouter } from "react-router-dom";
@@ -84,6 +85,15 @@ export const router = createBrowserRouter(
           element: (
             <Suspense fallback={<Loader />}>
               <Test />
+            </Suspense>
+          ),
+        },
+        {
+          path: "*",
+          element: (
+            <Suspense>
+              {" "}
+              <NotFound />
             </Suspense>
           ),
         },
