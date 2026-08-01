@@ -4,8 +4,7 @@ import ReplyCard from "@/components/ReplyCard/ReplyCard";
 import { useReplies } from "@/hooks/useReplies";
 
 export default function ReplyList({ tweetId }) {
-
-  console.log("ReplyList tweetId :", tweetId);
+  
   const { replies, isLoading, error } = useReplies(tweetId);
 
   if (isLoading) {

@@ -14,7 +14,7 @@ export async function createTweetService(data) {
     userId: user.uid,
     content: data.tweet,
     createdAt: Date.now(),
-    likes: 0,
+    
   };
 
   await set(tweetRef, tweet);

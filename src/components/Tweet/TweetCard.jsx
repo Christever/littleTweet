@@ -1,19 +1,37 @@
-import ReplyCard from "@/components/ReplyCard/ReplyCard";
+import Loader from "@/components/common/Loader/Loader";
 import ReplyForm from "@/components/ReplyForm/ReplyForm";
 import ReplyList from "@/components/ReplyList/ReplyList";
+import { useAuth } from "@/context/AuthContext";
+
+import useLike from "@/hooks/useLike";
 import { formatRelativeDate } from "@/utils/date";
 
 import { Card } from "primereact/card";
 import { useState } from "react";
 
 export default function TweetCard({ tweet }) {
+  // States
   const [showReply, setShowReply] = useState(false);
+
+  // Hook
+  const { isLoading, toggleLike } = useLike();
+
+  // Récuperation de l'utilisateur
+  const { user } = useAuth();
+
+  // Variables
+  const likesCount = Object.keys(tweet.likes ?? {}).length;
+  const hasLiked = !!tweet.likes?.[user.uid];
   const header = (
     <div className="flex items-center gap-2 p-2">
       <i className="pi pi-user text-teal-400 text-lg" />
       <h2 className="text-teal-400 font-semibold">{tweet.pseudo}</h2>
     </div>
   );
+
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <article>
       <Card
@@ -24,8 +42,11 @@ export default function TweetCard({ tweet }) {
 
         <div className="flex justify-between items-center mt-5 text-sm text-slate-400">
           <div className="flex gap-6">
-            <button className="hover:text-teal-400 duration-200">
-              ❤️ {tweet.likes}
+            <button
+              className={`${isLoading ? "opacity-50 cursor-not-allowed" : ""} hover:text-teal-400 duration-200`}
+              onClick={() => toggleLike(tweet.id, hasLiked)}
+            >
+              {hasLiked ? "❤️" : "🤍"} {likesCount}
             </button>
 
             <button

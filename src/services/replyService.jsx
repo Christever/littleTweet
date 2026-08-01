@@ -33,17 +33,21 @@ export function listenReplies(callback, errorCallback) {
   return unsubscribe;
 }
 
-export async function createReplyService(tweetId, content) {
+export async function createReplyService(
+  tweetId,
+  content,
+  parentReplyId = null,
+) {
   const user = auth.currentUser;
 
   if (!user) {
     throw new Error("Utilisateur non connecté");
   }
 
-  console.log("replyRef: ");
   const replyRef = push(ref(database, "replies"));
   const reply = {
     tweetId,
+    parentReplyId,
     userId: user.uid,
     content,
     createdAt: Date.now(),
