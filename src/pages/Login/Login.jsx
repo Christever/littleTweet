@@ -111,7 +111,7 @@ export default function Login() {
             type="button"
             icon="pi pi-arrow-left"
             outlined
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
           />
         </div>
       </form>

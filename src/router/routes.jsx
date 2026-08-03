@@ -11,6 +11,7 @@ const Tweets = lazy(() => import("@/pages/Tweets/TweetsList"));
 const NewTweet = lazy(() => import("@/pages/Tweets/NewTweet"));
 const About = lazy(() => import("@/pages/About/About"));
 const NotFound = lazy(() => import("@/pages/NotFound/NotFound"));
+const Profile = lazy(() => import("@/pages/Profile/Profile"));
 const Test = lazy(() => import("@/pages/Test"));
 
 import { createBrowserRouter } from "react-router-dom";
@@ -67,6 +68,16 @@ export const router = createBrowserRouter(
             <ProtectedRoute>
               <Suspense fallback={<Loader />}>
                 <NewTweet />
+              </Suspense>
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "profile",
+          element: (
+            <ProtectedRoute>
+              <Suspense fallback={<Loader />}>
+                <Profile />
               </Suspense>
             </ProtectedRoute>
           ),

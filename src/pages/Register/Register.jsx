@@ -194,11 +194,12 @@ export default function Register() {
           size="large"
         />
         <Button
-          className="bg-teal-600"
           label="Retour"
           type="button"
           icon="pi pi-arrow-left"
-          onClick={() => navigate(-1)}
+          severity="secondary"
+          outlined
+          onClick={() => navigate("/")}
         />
       </form>
 

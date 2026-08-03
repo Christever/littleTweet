@@ -1,5 +1,5 @@
-import { database } from "@/firebase/firebase";
-import { onValue, ref } from "firebase/database";
+import { auth, database } from "@/firebase/firebase";
+import { onValue, ref, update, get } from "firebase/database";
 
 export function listenUsers(callback, errorCallback) {
   const usersRef = ref(database, "users");
@@ -8,7 +8,7 @@ export function listenUsers(callback, errorCallback) {
   const unsubscribe = onValue(
     usersRef,
     (snapshot) => {
-      if (!snapshot) {
+      if (!snapshot.exists()) {
         callback({});
         return;
       }
@@ -23,3 +23,37 @@ export function listenUsers(callback, errorCallback) {
   return unsubscribe;
 }
 
+export async function updateProfileService(data, oldPseudo) {
+  const user = auth.currentUser;
+  console.log("DATA :", data);
+  console.log("ANCIEN PSEUDO :", oldPseudo);
+  if (!user) {
+    throw new Error("Utilisateur non connecté.");
+  }
+
+  const updates = {};
+  if (data.pseudo && data.pseudo !== oldPseudo) {
+    const usernameRef = ref(database, `usernames/${data.pseudo}`);
+
+    const snapshot = await get(usernameRef);
+
+    if (snapshot.exists()) {
+      return {
+        success: false,
+        message: "Ce pseudo existe déja",
+      };
+    }
+
+    updates[`usernames/${oldPseudo}`] = null;
+    updates[`usernames/${data.pseudo}`] = user.uid;
+  }
+
+  console.log("Updates: ", updates)
+
+  // Modifier l'utilisateur
+  updates[`users/${user.uid}`] = {
+    ...data,
+  };
+
+  await update(ref(database), updates);
+}

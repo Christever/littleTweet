@@ -11,14 +11,6 @@ export function useLogout() {
 
     const logout = async () => {
 
-        // Au cas où !
-        // if (!user) {
-        //     return {
-        //         success: false,
-        //         message: "Vous n'êtes pas connecté.",
-        //         data: null
-        //     }
-        // }
         try {
             setIsLoading(true);
             await logoutUserServices()
