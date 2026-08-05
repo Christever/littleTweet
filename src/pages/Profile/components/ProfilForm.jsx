@@ -5,22 +5,29 @@ import { Button } from "primereact/button";
 import { useAuth } from "@/context/AuthContext";
 import AvatarUser from "@/components/common/Avatar/Avatar";
 import { updateProfileService } from "@/services/userService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfileForm() {
   const { profile } = useAuth();
+  const navigate = useNavigate();
 
   const [pseudo, setPseudo] = useState(profile?.pseudo ?? "");
 
   const [isLoading, setIsLoading] = useState(false);
 
   async function handleSubmit(e) {
- 
     e.preventDefault();
     try {
       setIsLoading(true);
-      await updateProfileService({
-        pseudo,
-      }, profile.pseudo);
+      await updateProfileService(
+        {
+          pseudo,
+        },
+        profile.pseudo,
+      );
+      toast.success("Profil modifié");
+      navigate("/");
     } catch (error) {
       console.error("Erreur modification profil :", error.message);
     } finally {
