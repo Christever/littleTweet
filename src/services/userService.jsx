@@ -48,15 +48,12 @@ export async function updateProfileService(data, oldPseudo) {
     updates[`usernames/${data.pseudo}`] = user.uid;
   }
 
-  console.log("DATA REÇUE :", data);
-  console.log("UPDATES AVANT USER :", updates);
+
 
   // Modifier l'utilisateur
   Object.entries(data).forEach(([key, value]) => {
     updates[`users/${user.uid}/${key}`] = value;
   });
-
-  console.log("UPDATES FINAL :", updates);
 
   await update(ref(database), updates);
 }

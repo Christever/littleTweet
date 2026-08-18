@@ -6,12 +6,24 @@ import { tweetSchema } from "@/schemas/tweetSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "primereact/button";
 import { InputTextarea } from "primereact/inputtextarea";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function NewTweet() {
   const navigate = useNavigate();
+
+  const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (imagePreview) {
+        URL.revokeObjectURL(imagePreview);
+      }
+    };
+  }, [imagePreview]);
 
   // Hook
   const { createTweet, isLoading } = useCreateTweet();
@@ -32,19 +44,18 @@ export default function NewTweet() {
   const tweet = watch("tweet");
 
   const handlePublish = async (data) => {
-    const result = await createTweet(data);
-    if (result.success){
-      toast.success("LittleTweet publié avec succès")
-      navigate("/tweets")
-      return
-    }
-    else{
-      toast.error(result.message)
+    const result = await createTweet(data, imageFile);
+    if (result.success) {
+      toast.success("LittleTweet publié avec succès");
+      navigate("/tweets");
+      return;
+    } else {
+      toast.error(result.message);
     }
   };
 
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
   return (
     <ContainerLayout>
@@ -59,6 +70,33 @@ export default function NewTweet() {
           {...register("tweet")}
           autoFocus
         />
+        <div className="flex flex-col gap-2">
+          <div className="flex items-center justify-between">
+            <label className="">Insérer une photo</label>
+            <input
+              placeholder="Photo"
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setImageFile(file);
+                  setImagePreview(URL.createObjectURL(file));
+                }
+              }}
+            />
+
+            {imagePreview && (
+              <div className="mt-1">
+                <img
+                  src={imagePreview}
+                  alt="apercu"
+                  className=" object-cover rounded-lg shadow"
+                />
+              </div>
+            )}
+          </div>
+        </div>
         <p
           className={`flex justify-end ${tweet.length > 280 ? "text-rose-600" : "text-teal-100"} `}
         >

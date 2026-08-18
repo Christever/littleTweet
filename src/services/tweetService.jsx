@@ -1,7 +1,7 @@
 import { auth, database } from "@/firebase/firebase";
 import { push, ref, set, onValue } from "firebase/database";
 
-export async function createTweetService(data) {
+export async function createTweetService(data, photoURL) {
   const user = auth.currentUser;
 
   if (!user) {
@@ -14,7 +14,7 @@ export async function createTweetService(data) {
     userId: user.uid,
     content: data.tweet,
     createdAt: Date.now(),
-    
+    photoURL: photoURL || null,
   };
 
   await set(tweetRef, tweet);
