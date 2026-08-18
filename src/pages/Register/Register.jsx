@@ -54,8 +54,10 @@ export default function Register() {
       toast.success("Compte crée avec succès");
       navigate("/login");
       return;
+    } else {
+      toast.error(result.message);
+      return
     }
-    toast.error(result.error);
   };
 
   if (isLoading) {
