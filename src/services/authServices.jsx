@@ -44,6 +44,8 @@ export async function registerUserService(data, avatarUrl) {
     await set(usernameRef, user.uid);
     return user;
   } catch (error) {
+
+    // Email deja utilisé
     if (error.code === "auth/email-already-in-use") {
       throw new Error("Impossible de créer le compte avec ces informations");
     }
@@ -56,7 +58,6 @@ export async function loginUserService(data) {
   const { email, password } = data;
 
   const result = await signInWithEmailAndPassword(auth, email, password);
-  console.log("result: ", result)
   return result.user;
 }
 

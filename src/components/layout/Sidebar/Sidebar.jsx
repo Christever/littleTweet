@@ -15,7 +15,7 @@ export default function Sidebar() {
     console.log(response)
     if (response.success) {
       toast.success("Vous ête bien deconnecté.");
-      navigate("/");
+      navigate("/tweet");
       return;
     }
     toast.error(response.message);
