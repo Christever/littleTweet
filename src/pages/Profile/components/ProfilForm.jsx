@@ -63,7 +63,7 @@ export default function ProfileForm() {
 
       <Button
         type="submit"
-        label="Enregistrer"
+        label="Modifier mon profil"
         icon="pi pi-save"
         loading={isLoading}
         className=" mt-6 bg-teal-600 hover:bg-teal-700"

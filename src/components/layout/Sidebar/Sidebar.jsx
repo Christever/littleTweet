@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import AvatarUser from "@/components/common/Avatar/Avatar";
 import { useLogout } from "@/hooks/useLogout";
 import { toast } from "react-toastify";
+import { Divider } from "primereact/divider";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     const response = await logout();
-    console.log(response)
+    console.log(response);
     if (response.success) {
       toast.success("Vous ête bien deconnecté.");
       navigate("/tweet");
@@ -40,6 +41,25 @@ export default function Sidebar() {
           text
           className="justify-start text-slate-200"
           onClick={() => navigate("/profile")}
+        />
+
+        <Divider
+          className=""
+          pt={{
+            content: {
+              className: "bg-slate-900",
+            },
+          }}
+        >
+          <span className="text-teal-500 text-xs "> INFOS </span>
+        </Divider>
+        
+        <Button
+          label="A propos"
+          icon="pi pi-info-circle"
+          text
+          className="justify-start text-slate-200"
+          onClick={() => navigate("/about")}
         />
       </nav>
 
