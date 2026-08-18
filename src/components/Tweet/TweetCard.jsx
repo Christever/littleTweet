@@ -49,7 +49,7 @@ export default function TweetCard({ tweet }) {
             className="w-full max-h-[500px] object-contain"
           />
         ) : null}
-        <p className="text-slate-200 text-lg">{tweet.content}</p>
+        <p className="text-slate-200 text-lg mt-4">{tweet.content}</p>
 
         <div className="flex justify-between items-center mt-5 text-sm text-slate-400">
           <div className="flex gap-6">
