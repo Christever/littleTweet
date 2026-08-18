@@ -13,17 +13,19 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     const response = await logout();
-    console.log(response);
+    
     if (response.success) {
-      toast.success("Vous ête bien deconnecté.");
-      navigate("/tweet");
+      toast.success("Vous êtes bien deconnecté.");
+      console.log("AVANT NAVIGATION :", window.location.pathname);
+      navigate("/");
+      console.log("APRES NAVIGATION :", window.location.pathname);
       return;
     }
     toast.error(response.message);
   };
 
   return (
-    <aside className="w-64 h-screen sticky top-0 bg-slate-900 border-rborder-slate-800 p-5 flex flex-col">
+    <aside className="w-64 h-screen sticky top-0 bg-slate-900 border-r border-slate-800 p-5 flex flex-col">
       <h1 className="text-2xl font-bold text-teal-400 mb-8">🐦 MonTweet</h1>
 
       <nav className="flex flex-col gap-3">
@@ -53,7 +55,7 @@ export default function Sidebar() {
         >
           <span className="text-teal-500 text-xs "> INFOS </span>
         </Divider>
-        
+
         <Button
           label="A propos"
           icon="pi pi-info-circle"

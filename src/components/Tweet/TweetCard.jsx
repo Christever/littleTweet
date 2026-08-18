@@ -20,7 +20,6 @@ export default function TweetCard({ tweet }) {
   // Récuperation de l'utilisateur
   const { user } = useAuth();
 
-  console.log(tweet);
 
   // Variables
   const likesCount = Object.keys(tweet.likes ?? {}).length;
