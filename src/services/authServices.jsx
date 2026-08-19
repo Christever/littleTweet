@@ -38,13 +38,12 @@ export async function registerUserService(data, avatarUrl) {
       pseudo,
       role: "user",
       createdAt: Date.now(),
-      avatarUrl: avatarUrl || null
+      avatarUrl: avatarUrl || null,
     });
     // Reservation du pseudo
     await set(usernameRef, user.uid);
     return user;
   } catch (error) {
-
     // Email deja utilisé
     if (error.code === "auth/email-already-in-use") {
       throw new Error("Impossible de créer le compte avec ces informations");

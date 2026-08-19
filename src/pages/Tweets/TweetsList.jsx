@@ -36,7 +36,7 @@ export default function Tweets() {
   if (timelineError || repliesError ) {
     return (
       <div className="text-center mt-10">
-        <Title title="Une erreur est survenue..." subTitle={error} />
+        <Title title="Une erreur est survenue..." subTitle={timelineError || repliesError} />
       </div>
     );
   }
